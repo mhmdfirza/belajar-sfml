@@ -4,32 +4,46 @@ using namespace std;
 int main()
 {
     sf::RenderWindow window(
-        sf::VideoMode({800,600}),
+        sf::VideoMode({1080,720}),
         "SFML 3");
+
     // Load referensi font teks
     sf::Font font;
     if (!font.openFromFile("resources/fonts/arial.ttf")){
         return -1;
     }
 
+    // Load texture
+    sf::Texture texture;
+    if (!texture.loadFromFile("resources/assets/cartoonshipGreen.png")){
+        return -1;
+    }
+
+    // sprite nampel di texture
+    sf::Sprite ship(texture);
+    ship.setScale({0.5f,0.5f});
+    sf::FloatRect boundsShip = ship.getLocalBounds();
+    ship.setOrigin({boundsShip.size.x / 2.0f, boundsShip.size.y / 2.0f});
+
     // Inisiasi object shape yang digerakan
-    sf::CircleShape shape(50.f);
-    shape.setFillColor(sf::Color::Green);
+    //sf::RectangleShape shape(sf::Vector2(100.f,100.f));
+    //shape.setFillColor(sf::Color::Green);
+    //shape.setOrigin({50.f,50.f});
 
     // Inisiasi kecepatan gerak object
     float speed = 0.5f;
-
+    float rotationVelocity = 90.f;
 
     // Inisiasi fungsi display teks pakai referensi teks
-    sf::String displayString = "Hello World";
+    sf::String displayString = "Mainan Tembak tembak";
     // format: sf::Text 'nama variabel' "namaFont, variabelTeks, ukuran"
     sf::Text text(font, displayString,24);
 
-    auto bounds = text.getLocalBounds();
+    auto boundsText = text.getLocalBounds();
 
     text.setOrigin({
-        bounds.position.x + bounds.size.x / 2.f,
-        bounds.position.y + bounds.size.y / 2.f
+        boundsText.position.x + boundsText.size.x / 2.f,
+        boundsText.position.y + boundsText.size.y / 2.f
     });
 
     text.setFillColor(sf::Color::White);
@@ -37,9 +51,19 @@ int main()
 
      // nengahin posisi teks
     text.setPosition({
-        400.f - bounds.size.x / 2.f,
-        300.f - bounds.size.y / 2.f
+        1080.f - boundsText.size.x / 2.f,
+        720.f - boundsText.size.y / 2.f
     });
+
+    // structure projectile
+    struct Projectile{
+        sf::CircleShape shape;
+        sf::Vector2 velocity;
+    };
+
+    std::vector<Projectile> peluru;
+    float speedPeluru = 600.f;
+
 
     while(window.isOpen())
     {
@@ -50,20 +74,25 @@ int main()
         }
 
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
-            shape.move({0.f,-speed});
+            ship.move({0.f,-speed});
 
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
-            shape.move({0.f,speed});
+            ship.move({0.f,speed});
 
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
-            shape.move({-speed,0.f});
+            ship.move({-speed,0.f});
 
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
-            shape.move({speed,0.f});
+            ship.move({speed,0.f});
 
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
+            ship.rotate(sf::degrees(-10));
+
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
+            ship.rotate(sf::degrees(10));
         window.clear();
 
-        window.draw(shape);
+        window.draw(ship);
 
         window.draw(text);
 
