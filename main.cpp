@@ -55,12 +55,13 @@ int main()
         720.f - boundsText.size.y / 2.f
     });
 
-    // structure projectile
+    // structure proyektil peluru
     struct Projectile{
         sf::CircleShape shape;
         sf::Vector2 velocity;
     };
 
+    // variabel peluru
     std::vector<Projectile> peluru;
     float speedPeluru = 600.f;
 
@@ -90,6 +91,25 @@ int main()
 
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
             ship.rotate(sf::degrees(10));
+
+        if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
+            Projectile peluruBaru;
+            peluruBaru.shape.setRadius(5.f);
+            peluruBaru.shape.setFillColor(sf::Color::Yellow);
+
+            // Spawn at player's position
+            peluruBaru.shape.setPosition(player.getPosition());
+
+            // Set direction (e.g., shooting straight up)
+            peluruBaru.velocity = sf::Vector2f(0.f, -1.f) * bulletSpeed;
+
+            peluru.push_back(peluruBaru);
+        }
+
+        for (auto& peluru : peluru){
+            peluru.shape.move(peluru.velocity * dt)
+        }
+
         window.clear();
 
         window.draw(ship);
