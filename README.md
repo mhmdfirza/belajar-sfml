@@ -17,3 +17,8 @@ Log Belajar
 3. Menambahkan mekanisme menembakkan peluru yang keluar dari object ship
 4. Menambahkan struct dari beberapa komponen penting untuk mekanik menembak
 5. Menambahkan beberapa input keyboard untuk rotasi dan menembak
+
+7/18/2026
+1. Memperbaiki bug musik
+2. Memperbaiki logika projektil peluru
+3. Memperbaiki error struct dari object
