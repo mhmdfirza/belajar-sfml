@@ -1,6 +1,8 @@
 # depslib dependency file v1.0
-1784250661 source:d:\cpp\initialproject\main.cpp
+1784353984 source:d:\cpp\initialproject\main.cpp
 	<SFML/Graphics.hpp>
+	<SFML/Audio.hpp>
+	<iostream>
 
 1776350337 c:\program files\sfml-3.1.0\include\sfml\graphics.hpp
 	<SFML/Graphics/BlendMode.hpp>
@@ -538,4 +540,147 @@
 	<SFML/System/Export.hpp>
 	<string_view>
 	<cstdint>
+
+1776350337 c:\program files\sfml-3.1.0\include\sfml\audio.hpp
+	<SFML/Audio/InputSoundFile.hpp>
+	<SFML/Audio/Listener.hpp>
+	<SFML/Audio/Music.hpp>
+	<SFML/Audio/OutputSoundFile.hpp>
+	<SFML/Audio/PlaybackDevice.hpp>
+	<SFML/Audio/Sound.hpp>
+	<SFML/Audio/SoundBuffer.hpp>
+	<SFML/Audio/SoundBufferRecorder.hpp>
+	<SFML/Audio/SoundFileFactory.hpp>
+	<SFML/Audio/SoundFileReader.hpp>
+	<SFML/Audio/SoundFileWriter.hpp>
+	<SFML/Audio/SoundRecorder.hpp>
+	<SFML/Audio/SoundSource.hpp>
+	<SFML/Audio/SoundStream.hpp>
+	<SFML/System.hpp>
+
+1776350337 c:\program files\sfml-3.1.0\include\sfml\audio\inputsoundfile.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundFileReader.hpp>
+	<filesystem>
+	<memory>
+	<vector>
+	<cstddef>
+	<cstdint>
+
+1776350337 c:\program files\sfml-3.1.0\include\sfml\audio\export.hpp
+	<SFML/Config.hpp>
+
+1776350337 c:\program files\sfml-3.1.0\include\sfml\audio\soundfilereader.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundChannel.hpp>
+	<optional>
+	<vector>
+	<cstdint>
+
+1776350337 c:\program files\sfml-3.1.0\include\sfml\audio\soundchannel.hpp
+
+1776350337 c:\program files\sfml-3.1.0\include\sfml\audio\listener.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/System/Angle.hpp>
+	<SFML/System/Vector3.hpp>
+
+1776350337 c:\program files\sfml-3.1.0\include\sfml\audio\music.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundStream.hpp>
+	<filesystem>
+	<memory>
+	<optional>
+	<cstddef>
+	<cstdint>
+
+1776350337 c:\program files\sfml-3.1.0\include\sfml\audio\soundstream.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundChannel.hpp>
+	<SFML/Audio/SoundSource.hpp>
+	<SFML/System/Time.hpp>
+	<memory>
+	<optional>
+	<vector>
+	<cstddef>
+	<cstdint>
+
+1776350337 c:\program files\sfml-3.1.0\include\sfml\audio\soundsource.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/AudioResource.hpp>
+	<SFML/System/Angle.hpp>
+	<SFML/System/Vector3.hpp>
+	<functional>
+
+1776350337 c:\program files\sfml-3.1.0\include\sfml\audio\audioresource.hpp
+	<SFML/Audio/Export.hpp>
+	<memory>
+
+1776350337 c:\program files\sfml-3.1.0\include\sfml\audio\outputsoundfile.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundChannel.hpp>
+	<SFML/Audio/SoundFileWriter.hpp>
+	<filesystem>
+	<memory>
+	<vector>
+	<cstdint>
+
+1776350337 c:\program files\sfml-3.1.0\include\sfml\audio\soundfilewriter.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundChannel.hpp>
+	<filesystem>
+	<vector>
+	<cstdint>
+
+1776350337 c:\program files\sfml-3.1.0\include\sfml\audio\playbackdevice.hpp
+	<SFML/Audio/Export.hpp>
+	<functional>
+	<optional>
+	<string>
+	<vector>
+	<cstdint>
+
+1776350337 c:\program files\sfml-3.1.0\include\sfml\audio\sound.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundSource.hpp>
+	<memory>
+	<cstdlib>
+
+1776350337 c:\program files\sfml-3.1.0\include\sfml\audio\soundbuffer.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundChannel.hpp>
+	<SFML/System/Time.hpp>
+	<filesystem>
+	<unordered_set>
+	<vector>
+	<cstddef>
+	<cstdint>
+
+1776350337 c:\program files\sfml-3.1.0\include\sfml\audio\soundbufferrecorder.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundBuffer.hpp>
+	<SFML/Audio/SoundRecorder.hpp>
+	<vector>
+	<cstddef>
+	<cstdint>
+
+1776350337 c:\program files\sfml-3.1.0\include\sfml\audio\soundrecorder.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundChannel.hpp>
+	<memory>
+	<string>
+	<vector>
+	<cstddef>
+	<cstdint>
+
+1776350337 c:\program files\sfml-3.1.0\include\sfml\audio\soundfilefactory.hpp
+	<SFML/Audio/Export.hpp>
+	<filesystem>
+	<memory>
+	<unordered_map>
+	<cstddef>
+	<SFML/Audio/SoundFileFactory.inl>
+
+1776350337 c:\program files\sfml-3.1.0\include\sfml\audio\soundfilefactory.inl
+	<SFML/Audio/SoundFileFactory.hpp>
+	<memory>
 

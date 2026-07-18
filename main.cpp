@@ -1,92 +1,94 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+#include <iostream>
 using namespace std;
 
 int main()
 {
+    // ----------- LOAD RESOURCES -----------
+    // RENDER WINDOW
     sf::RenderWindow window(
         sf::VideoMode({1080,720}),
         "SFML 3");
-
-    // Load referensi font teks
+    sf::Vector2 windowSize= window.getSize();
+    // LOAD FONT
     sf::Font font;
     if (!font.openFromFile("resources/font/arial.ttf")){
+        cout << "Error: Failed Load Font\n";
         return -1;
     }
-
-    // Load texture
+    // LOAD TEXTURE
     sf::Texture texture;
     if (!texture.loadFromFile("resources/asset/cartoonshipGreen.png")){
+        cout << "Error: Failed Load Asset\n";
         return -1;
     }
-
-    // Sprite nampel di texture
+    // LOAD SHIP
     sf::Sprite ship(texture);
-    ship.setScale({0.5f,0.5f});
+    ship.setScale({0.25f,0.25f});
+    // yang dimaksud setOrigin tuh, origin dari object itu sendri
     sf::FloatRect boundsShip = ship.getLocalBounds();
     ship.setOrigin({boundsShip.size.x / 2.0f, boundsShip.size.y / 2.0f});
 
-    // Inisiasi object shape yang digerakan
-    //sf::RectangleShape shape(sf::Vector2(100.f,100.f));
-    //shape.setFillColor(sf::Color::Green);
-    //shape.setOrigin({50.f,50.f});
+    // LOAD Peluru
+    sf::CircleShape bullet(10.f);
+    bullet.setFillColor(sf::Color::Yellow);
 
-    // Inisiasi display teks
+    // LOAD TEXT
     sf::String displayString = "Mainan Tembak tembak";
-    // format: sf::Text 'nama variabel' "namaFont, variabelTeks, ukuran"
     sf::Text text(font, displayString,24);
-
     auto boundsText = text.getLocalBounds();
-
     text.setOrigin({
         boundsText.position.x + boundsText.size.x / 2.f,
         boundsText.position.y + boundsText.size.y / 2.f
     });
-
     text.setFillColor(sf::Color::White);
-    text.setPosition({50.f,50.f});
 
-     // nengahin posisi teks
+    // --------- SET OBJECT & TEXT KE TENGAH -------
+    ship.setPosition({
+                     static_cast<float>(windowSize.x)/2.f,
+                     static_cast<float>(windowSize.y)/2.f
+                     });
     text.setPosition({
-        1080.f - boundsText.size.x / 2.f,
-        720.f - boundsText.size.y / 2.f
-    });
+                     static_cast<float>(windowSize.x)/2.f,
+                     // static_cast<float>(windowsSize.x)/2.f
+                     20}
+                     );
 
-    // structure proyektil peluru
-    struct projectile{
+    // LOAD MUSIC
+    sf::Music music;
+    if (!music.openFromFile("resources/music/aud1.mp3")){
+        cout << "Error: Failed Load Music\n";
+        return -1;
+    }
+    music.play();
+    music.setVolume(50);
+
+    struct player{
+        sf::Sprite sprite;
+        float speed;
+    };
+
+    float angle = player.getRotation();
+    float radian = angle * 3.14 /180.f;
+
+    sf::Vector2f direction(cos(radian),sin(radian));
+
+    struct Bullet{
         sf::CircleShape shape;
         sf::Vector2f velocity;
     };
 
-    std::vector<projectile> bullets;
-    float bulletSpeed = 600.f;
+    Bullet bullet;
+    Player ship;
 
-    // stucture ship
-    struct ship {
-        // Sprite nampel di texture
-        sf::Sprite object(texture);
-        object.setScale({0.5f,0.5f});
-        sf::FloatRect boundsObject= object.getLocalBounds();
-        object.setOrigin({boundsObject.size.x / 2.0f, boundsObject.size.y / 2.0f});
+    float speedBullet = 2.f;
 
-        sf::Vector2f position;
-        float rotation;
+    bullet.velocity = direction * speedBullet;
 
-        // kecepatan gerak objek
-        float speed = 0.5f;
+    float speed = 0.5f;
 
-        // kecepatan rotasi objek
-        float rotationVelocity = 90.f;
-    };
-
-
-    // inisiasi musik
-    sf::Music lagu;
-    if (!lagu.openFromFile("resources/music/aud1.mp3")){
-        std::cout << "Error: Failed Load Music\n";
-        return -1;
-    }
-
-    // buka window
+    // ----------- RENDER GAME MAIN -----------
     while(window.isOpen())
     {
         while(const std::optional event = window.pollEvent())
@@ -104,32 +106,17 @@ int main()
             ship.move({-speed,0.f});
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
             ship.move({speed,0.f});
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
+            ship.move({0.f,-speed});
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
+            ship.move({0.f,speed});
 
         // logika rotasi
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
-            ship.rotate(sf::degrees(-2.f));
+            ship.rotate(sf::degrees(-0.5));
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
-            ship.rotate(sf::degrees(2.f));
+            ship.rotate(sf::degrees(0.5));
 
-
-
-        if (sf::Event::KeyPressed && event.key.code == sf::Keyboard::Key::Space) {
-            Projectile peluruBaru;
-            peluruBaru.shape.setRadius(5.f);
-            peluruBaru.shape.setFillColor(sf::Color::Yellow);
-
-            // Spawn di posisi ship
-            peluruBaru.shape.setPosition(ship.getPosition());
-
-            // Set direction (e.g., shooting straight up)
-            peluruBaru.velocity = sf::Vector2f(0.f, -1.f) * speedPeluru;
-
-            peluru.push_back(peluruBaru);
-        };
-
-        for (auto& peluru : peluru){
-            peluru.shape.move(peluru.velocity)
-        }
 
         window.clear();
 
