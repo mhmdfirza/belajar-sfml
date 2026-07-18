@@ -9,17 +9,17 @@ int main()
 
     // Load referensi font teks
     sf::Font font;
-    if (!font.openFromFile("resources/fonts/arial.ttf")){
+    if (!font.openFromFile("resources/font/arial.ttf")){
         return -1;
     }
 
     // Load texture
     sf::Texture texture;
-    if (!texture.loadFromFile("resources/assets/cartoonshipGreen.png")){
+    if (!texture.loadFromFile("resources/asset/cartoonshipGreen.png")){
         return -1;
     }
 
-    // sprite nampel di texture
+    // Sprite nampel di texture
     sf::Sprite ship(texture);
     ship.setScale({0.5f,0.5f});
     sf::FloatRect boundsShip = ship.getLocalBounds();
@@ -30,11 +30,7 @@ int main()
     //shape.setFillColor(sf::Color::Green);
     //shape.setOrigin({50.f,50.f});
 
-    // Inisiasi kecepatan gerak object
-    float speed = 0.5f;
-    float rotationVelocity = 90.f;
-
-    // Inisiasi fungsi display teks pakai referensi teks
+    // Inisiasi display teks
     sf::String displayString = "Mainan Tembak tembak";
     // format: sf::Text 'nama variabel' "namaFont, variabelTeks, ukuran"
     sf::Text text(font, displayString,24);
@@ -56,16 +52,41 @@ int main()
     });
 
     // structure proyektil peluru
-    struct Projectile{
+    struct projectile{
         sf::CircleShape shape;
-        sf::Vector2 velocity;
+        sf::Vector2f velocity;
     };
 
-    // variabel peluru
-    std::vector<Projectile> peluru;
-    float speedPeluru = 600.f;
+    std::vector<projectile> bullets;
+    float bulletSpeed = 600.f;
+
+    // stucture ship
+    struct ship {
+        // Sprite nampel di texture
+        sf::Sprite object(texture);
+        object.setScale({0.5f,0.5f});
+        sf::FloatRect boundsObject= object.getLocalBounds();
+        object.setOrigin({boundsObject.size.x / 2.0f, boundsObject.size.y / 2.0f});
+
+        sf::Vector2f position;
+        float rotation;
+
+        // kecepatan gerak objek
+        float speed = 0.5f;
+
+        // kecepatan rotasi objek
+        float rotationVelocity = 90.f;
+    };
 
 
+    // inisiasi musik
+    sf::Music lagu;
+    if (!lagu.openFromFile("resources/music/aud1.mp3")){
+        std::cout << "Error: Failed Load Music\n";
+        return -1;
+    }
+
+    // buka window
     while(window.isOpen())
     {
         while(const std::optional event = window.pollEvent())
@@ -74,40 +95,40 @@ int main()
                 window.close();
         }
 
+        // logika pergerakan
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
             ship.move({0.f,-speed});
-
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
             ship.move({0.f,speed});
-
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
             ship.move({-speed,0.f});
-
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
             ship.move({speed,0.f});
 
+        // logika rotasi
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
-            ship.rotate(sf::degrees(-10));
-
+            ship.rotate(sf::degrees(-2.f));
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
-            ship.rotate(sf::degrees(10));
+            ship.rotate(sf::degrees(2.f));
 
-        if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
+
+
+        if (sf::Event::KeyPressed && event.key.code == sf::Keyboard::Key::Space) {
             Projectile peluruBaru;
             peluruBaru.shape.setRadius(5.f);
             peluruBaru.shape.setFillColor(sf::Color::Yellow);
 
-            // Spawn at player's position
-            peluruBaru.shape.setPosition(player.getPosition());
+            // Spawn di posisi ship
+            peluruBaru.shape.setPosition(ship.getPosition());
 
             // Set direction (e.g., shooting straight up)
-            peluruBaru.velocity = sf::Vector2f(0.f, -1.f) * bulletSpeed;
+            peluruBaru.velocity = sf::Vector2f(0.f, -1.f) * speedPeluru;
 
             peluru.push_back(peluruBaru);
-        }
+        };
 
         for (auto& peluru : peluru){
-            peluru.shape.move(peluru.velocity * dt)
+            peluru.shape.move(peluru.velocity)
         }
 
         window.clear();
