@@ -64,32 +64,8 @@ int main()
     music.play();
     music.setVolume(50);
 
-    struct Player
-    {
-        sf::Sprite sprite;
-        float speed = 0.5f;
-    };
-
-    struct Bullet
-    {
-        sf::CircleShape shape;
-        sf::Vector2f velocity;
-    };
-
-    Player ship;
-    Bullet bullet;
-
-    float angle = ship.sprite.getRotation().asDegrees();
-    float radian = angle * 3.14159265f / 180.f;
-
-    sf::Vector2f direction(
-        std::cos(radian),
-        std::sin(radian)
-    );
-
-    bullet.velocity = direction * speedBullet;
-
-    float speed = 15.f;
+    float speed = 1.f;
+    float offset = 20.f;
 
     // ----------- RENDER GAME MAIN -----------
     while(window.isOpen())
@@ -109,16 +85,20 @@ int main()
             ship.move({-speed,0.f});
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
             ship.move({speed,0.f});
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
-            ship.move({0.f,-speed});
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
-            ship.move({0.f,speed});
 
         // logika rotasi
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
             ship.rotate(sf::degrees(-0.5));
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
             ship.rotate(sf::degrees(0.5));
+
+        // rencananya buat fungsi puter 180, tapi perlu tambahin motion muternya biar ga langsung
+//        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
+//            ship.rotate(sf::degrees(180.f));
+//        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
+//            ship.rotate(sf::degrees(180.f));
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
+            float.bullet(ship.x, ship.y - offset)
 
 
         window.clear();
