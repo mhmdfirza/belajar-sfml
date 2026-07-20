@@ -22,3 +22,13 @@ Log Belajar
 1. Memperbaiki bug musik
 2. Memperbaiki logika projektil peluru
 3. Memperbaiki error struct dari object
+
+7/19/2026
+1. Progress logika proyektil peluru
+2. Progress logika peluru
+3. Progress penempatan peluru
+4. IDEA:
+- Menambahkan logika penyimpanan peluru
+- Menambahkan logika mag peluru
+- Menambahkan object target tembak
+- Menambahkan poin jika peluru mengenai target
