@@ -64,29 +64,32 @@ int main()
     music.play();
     music.setVolume(50);
 
-    struct player{
+    struct Player
+    {
         sf::Sprite sprite;
-        float speed;
+        float speed = 0.5f;
     };
 
-    float angle = player.getRotation();
-    float radian = angle * 3.14 /180.f;
-
-    sf::Vector2f direction(cos(radian),sin(radian));
-
-    struct Bullet{
+    struct Bullet
+    {
         sf::CircleShape shape;
         sf::Vector2f velocity;
     };
 
-    Bullet bullet;
     Player ship;
+    Bullet bullet;
 
-    float speedBullet = 2.f;
+    float angle = ship.sprite.getRotation().asDegrees();
+    float radian = angle * 3.14159265f / 180.f;
+
+    sf::Vector2f direction(
+        std::cos(radian),
+        std::sin(radian)
+    );
 
     bullet.velocity = direction * speedBullet;
 
-    float speed = 0.5f;
+    float speed = 15.f;
 
     // ----------- RENDER GAME MAIN -----------
     while(window.isOpen())
