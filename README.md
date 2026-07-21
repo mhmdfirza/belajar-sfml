@@ -32,3 +32,9 @@ Log Belajar
 - Menambahkan logika mag peluru
 - Menambahkan object target tembak
 - Menambahkan poin jika peluru mengenai target
+
+7/22/2026
+1. Progress logika penempatan peluru
+2. Logika posisi peluru
+3. Logika hitbox peluru
+4. Logika hitbox target
