@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <iostream>
+#include <cmath>
 using namespace std;
 
 int main()
@@ -38,6 +39,10 @@ int main()
     // LOAD PELURU
     sf::CircleShape bullet(0.1f);
     bullet.setFillColor(sf::Color::Yellow);
+    struct Bullet{
+        sf:CircleShape shape;
+        sf::Vector2f velocity;
+    };
     sf::FloatRect boundsBullet = bullet.getLocalBounds();
     bullet.setOrigin({boundsBullet.size.x/2.0f, boundsBullet.size.y/2.0f});
     sf::Vector2f bulletPosition({
@@ -63,7 +68,7 @@ int main()
     text.setPosition({
                      static_cast<float>(windowSize.x)/2.f,
                      // static_cast<float>(windowsSize.x)/2.f
-                     20}
+                     static_cast<float>(windowSize.y)/6.f}
                      );
 
     // LOAD MUSIC
