@@ -29,10 +29,21 @@ int main()
     // yang dimaksud setOrigin tuh, origin dari object itu sendri
     sf::FloatRect boundsShip = ship.getLocalBounds();
     ship.setOrigin({boundsShip.size.x / 2.0f, boundsShip.size.y / 2.0f});
+    ship.setPosition({
+                     window.getSize().x / 2.0f;
+                     window.getSize().y / 2.0f;
+                     });
+    sf::Vector2f shipPosition = ship.getPosition();
 
     // LOAD PELURU
-    sf::CircleShape bullet(10.f);
+    sf::CircleShape bullet(0.1f);
     bullet.setFillColor(sf::Color::Yellow);
+    sf::FloatRect boundsBullet = bullet.getLocalBounds();
+    bullet.setOrigin({boundsBullet.size.x/2.0f, boundsBullet.size.y/2.0f});
+    sf::Vector2f bulletPosition({
+                                shipPosition.x + 5.0f;
+                                shipPosition.y;
+                                });
 
     // LOAD TEXT
     sf::String displayString = "Mainan Tembak tembak";
@@ -86,7 +97,7 @@ int main()
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
             ship.move({speed,0.f});
 
-        // logika rotasi
+        // logika rotasi (nengok)
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
             ship.rotate(sf::degrees(-0.5));
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
@@ -97,8 +108,12 @@ int main()
 //            ship.rotate(sf::degrees(180.f));
 //        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
 //            ship.rotate(sf::degrees(180.f));
+//        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
+//            float.bullet(ship.x, ship.y - offset);
+
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
-            float.bullet(ship.x, ship.y - offset);
+            // spawn bullet dan tembak ke arah yang dilihat oleh object
+
 
         window.clear();
 
