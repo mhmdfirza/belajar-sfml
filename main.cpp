@@ -37,6 +37,8 @@ int main()
     sf::Vector2f shipPosition = ship.getPosition();
 
     // LOAD PELURU
+    sf::CircleShape bullet(0.1f);
+    bullet.setFillColor(sf::Color::Yellow);
     struct Bullet{
         sf::CircleShape shape;
         sf::Vector2f velocity;
@@ -78,6 +80,8 @@ int main()
     // ----------- RENDER GAME MAIN -----------
     while(window.isOpen())
     {
+        float dt = deltaClock.restart().asSeconds();
+
         while(const std::optional event = window.pollEvent())
         {
             if(event->is<sf::Event::Closed>())
@@ -109,13 +113,14 @@ int main()
 //            float.bullet(ship.x, ship.y - offset);
 
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)&& fireClock.getElapsedTime().asSeconds()>=fireRate)
+        {
             window.draw(bullet);// spawn bullet dan tembak ke arah yang dilihat oleh object
 
             // sudut rotasi kapal dalam radian
             float angleRad = ship.getRotation().asRadians();
 
             // kecepatan peluru
-            float bulletSpeed = 500.f
+            float bulletSpeed = 500.f;
 
             // hitung arah vektor bergerak maju
             sf::Vector2f bulletVelocity(
@@ -139,15 +144,25 @@ int main()
             // masuk magazine
             bullets.push_back(newBullet);
 
-            // cooldown
+            // rest cooldown temban
             fireClock.restart();
         }
 
-        window.clear();
+        // gerakan peluru
+        for (auto& b : bullets){
+            b.shape.move(b.velocity*dt);
+        }
+
+        // Render gambar
+        window.clear(sf::Color::Black);
 
         window.draw(ship);
 
         window.draw(text);
+
+        for(const auto& b: bullets){
+            window.draw(b.shape);
+        }
 
         window.display();
     }
