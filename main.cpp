@@ -31,8 +31,8 @@ int main()
     sf::FloatRect boundsShip = ship.getLocalBounds();
     ship.setOrigin({boundsShip.size.x / 2.0f, boundsShip.size.y / 2.0f});
     ship.setPosition({
-                     window.getSize().x / 2.0f;
-                     window.getSize().y / 2.0f;
+                     window.getSize().x / 2.0f,
+                     window.getSize().y / 2.0f
                      });
     sf::Vector2f shipPosition = ship.getPosition();
 
@@ -40,13 +40,13 @@ int main()
     sf::CircleShape bullet(0.1f);
     bullet.setFillColor(sf::Color::Yellow);
     struct Bullet{
-        sf:CircleShape shape;
+        sf::CircleShape shape;
         sf::Vector2f velocity;
     };
     sf::FloatRect boundsBullet = bullet.getLocalBounds();
     bullet.setOrigin({boundsBullet.size.x/2.0f, boundsBullet.size.y/2.0f});
     sf::Vector2f bulletPosition({
-                                shipPosition.x + 5.0f;
+                                shipPosition.x + 5.0f,
                                 shipPosition.y;
                                 });
 
