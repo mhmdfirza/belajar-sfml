@@ -38,3 +38,8 @@ Log Belajar
 2. Logika posisi peluru
 3. Logika hitbox peluru
 4. Logika hitbox target
+
+7/23/2026
+1. Fix fitur bullet
+2. Menambahkan enemy
+3. 

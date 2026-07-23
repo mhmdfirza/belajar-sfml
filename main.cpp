@@ -19,14 +19,28 @@ int main()
         cout << "Error: Failed Load Font\n";
         return -1;
     }
-    // LOAD TEXTURE
-    sf::Texture texture;
-    if (!texture.loadFromFile("resources/asset/cartoonshipGreen.png")){
+    // LOAD SHIP TEXTURE
+    sf::Texture shipTexture;
+    if (!shipTexture.loadFromFile("resources/asset/cartoonShipGreen.png")){
         cout << "Error: Failed Load Asset\n";
         return -1;
     }
+
+    // LOAD ENEMY TEXTURE
+    sf::Texture enemyTexture;
+    if (!enemyTexture.loadFromFile("resources/asset/cartoonShipRed.png")){
+        cout << "Error: Failed Load Enemy Asset\n";
+    }
+
+    // LOAD ENEMY SPRITE
+    sf::Sprite enemy(enemyTexture);
+    enemy.setScale({0.25f,0.25f});
+    sf::FloatRect boundsEnemy = enemy.getLocalBounds();
+    enemy.setOrigin({boundsEnemy.size.x / 2.0f, boundsEnemy.size.y / 2.0f});
+    enemy.setPosition
+
     // LOAD SHIP
-    sf::Sprite ship(texture);
+    sf::Sprite ship(shipTexture);
     ship.setScale({0.25f,0.25f});
     // yang dimaksud setOrigin tuh, origin dari object itu sendri
     sf::FloatRect boundsShip = ship.getLocalBounds();
@@ -149,8 +163,8 @@ int main()
             fireClock.restart();
 
             std::remove_if(bullets.begin(), bullets.end(), [windowSize](const Bullet& b) {
-                sf::Vector2f pos = b.shape.getPosition();
                 return (pos.x < 0.f || pos.x > windowSize.x || pos.y < 0.f || pos.y > windowSize.y);
+                sf::Vector2f pos = b.shape.getPosition();
                 });
         }
 
