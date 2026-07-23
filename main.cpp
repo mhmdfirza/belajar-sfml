@@ -3,16 +3,35 @@
 #include <iostream>
 #include <cmath>
 #include <algorithm>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
+
+ struct Bullet{
+    sf::CircleShape shape;
+    sf::Vector2f velocity;
+    bool destroy = false;
+};
+
+struct Enemy {
+    sf::CircleShape shape;
+    float speed;
+    bool destroy = false;
+};
 
 int main()
 {
+    std::srand(static_cast<unsigned int>(std::time(nullptr)));
+
     // ----------- LOAD RESOURCES -----------
     // RENDER WINDOW
     sf::RenderWindow window(
         sf::VideoMode({1080,720}),
-        "SFML 3");
+        "SFML 3.1 - Space Shooter GAMEEEEEEEE !!!!!!");
+    window.setFramerateLimit(60);
     sf::Vector2 windowSize= static_cast<sf::Vector2f>(window.getSize());
+
+
     // LOAD FONT
     sf::Font font;
     if (!font.openFromFile("resources/font/arial.ttf")){
@@ -32,12 +51,12 @@ int main()
         cout << "Error: Failed Load Enemy Asset\n";
     }
 
-    // LOAD ENEMY SPRITE
-    sf::Sprite enemy(enemyTexture);
-    enemy.setScale({0.25f,0.25f});
-    sf::FloatRect boundsEnemy = enemy.getLocalBounds();
-    enemy.setOrigin({boundsEnemy.size.x / 2.0f, boundsEnemy.size.y / 2.0f});
-    enemy.setPosition
+//    // LOAD ENEMY SPRITE
+//    sf::Sprite enemy(enemyTexture);
+//    enemy.setScale({0.25f,0.25f});
+//    sf::FloatRect boundsEnemy = enemy.getLocalBounds();
+//    enemy.setOrigin({boundsEnemy.size.x / 2.0f, boundsEnemy.size.y / 2.0f});
+//    enemy.setPosition;
 
     // LOAD SHIP
     sf::Sprite ship(shipTexture);
@@ -54,10 +73,7 @@ int main()
     // LOAD PELURU
     sf::CircleShape bullet(0.1f);
     bullet.setFillColor(sf::Color::Yellow);
-    struct Bullet{
-        sf::CircleShape shape;
-        sf::Vector2f velocity;
-    };
+
     sf::FloatRect boundsBullet = bullet.getLocalBounds();
     bullet.setOrigin({boundsBullet.size.x/2.0f, boundsBullet.size.y/2.0f});
     sf::Vector2f bulletPosition({shipPosition.x + 5.0f, shipPosition.y});
@@ -127,6 +143,8 @@ int main()
 //        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
 //            float.bullet(ship.x, ship.y - offset);
 
+        // ------------------------ SPAWN BULLET ------------------------
+
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)&& fireClock.getElapsedTime().asSeconds()>=fireRate)
         {
             window.draw(bullet);// spawn bullet dan tembak ke arah yang dilihat oleh object
@@ -166,6 +184,30 @@ int main()
                 return (pos.x < 0.f || pos.x > windowSize.x || pos.y < 0.f || pos.y > windowSize.y);
                 sf::Vector2f pos = b.shape.getPosition();
                 });
+        }
+
+        // ---------------- SPAWN ENEMY ----------------
+        if (enemySpawnClock.getElapsedTime().asSeconds() >= enemySpawnRate)
+        {
+            sf::Vector2f winSize = static_cast<sf::Vector2f>(window.getSize());
+            sf::Vector2f spawnPos;
+
+            // Pilih sisi spawn secara acak (0: Atas, 1: Kanan, 2: Bawah, 3: Kiri)
+            int side = std::rand() % 4;
+            if (side == 0)      spawnPos = { static_cast<float>(std::rand() % static_cast<int>(winSize.x)), -30.f };
+            else if (side == 1) spawnPos = { winSize.x + 30.f, static_cast<float>(std::rand() % static_cast<int>(winSize.y)) };
+            else if (side == 2) spawnPos = { static_cast<float>(std::rand() % static_cast<int>(winSize.x)), winSize.y + 30.f };
+            else                spawnPos = { -30.f, static_cast<float>(std::rand() % static_cast<int>(winSize.y)) };
+
+            Enemy newEnemy;
+            newEnemy.shape.setRadius(15.f);
+            newEnemy.shape.setFillColor(sf::Color::Red);
+            newEnemy.shape.setOrigin({15.f, 15.f});
+            newEnemy.shape.setPosition(spawnPos);
+            newEnemy.speed = 120.f + (std::rand() % 80); // Kecepatan acak (120 - 200)
+
+            enemies.push_back(newEnemy);
+            enemySpawnClock.restart();
         }
 
         // gerakan peluru
