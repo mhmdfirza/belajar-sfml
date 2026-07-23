@@ -2,6 +2,7 @@
 #include <SFML/Audio.hpp>
 #include <iostream>
 #include <cmath>
+#include <algorithm>
 using namespace std;
 
 int main()
@@ -11,7 +12,7 @@ int main()
     sf::RenderWindow window(
         sf::VideoMode({1080,720}),
         "SFML 3");
-    sf::Vector2 windowSize= window.getSize();
+    sf::Vector2 windowSize= static_cast<sf::Vector2f>(window.getSize());
     // LOAD FONT
     sf::Font font;
     if (!font.openFromFile("resources/font/arial.ttf")){
@@ -124,8 +125,8 @@ int main()
 
             // hitung arah vektor bergerak maju
             sf::Vector2f bulletVelocity(
-                std::sin(angleRad) * speed,
-                -std::cos(angleRad) * speed
+                std::sin(angleRad) * bulletSpeed,
+                -std::cos(angleRad) * bulletSpeed
                                         );
             // moncong depan kapal
             float offset = (boundsShip.size.y * ship.getScale().y)/ 2.0f;
@@ -146,6 +147,11 @@ int main()
 
             // rest cooldown temban
             fireClock.restart();
+
+            std::remove_if(bullets.begin(), bullets.end(), [windowSize](const Bullet& b) {
+                sf::Vector2f pos = b.shape.getPosition();
+                return (pos.x < 0.f || pos.x > windowSize.x || pos.y < 0.f || pos.y > windowSize.y);
+                });
         }
 
         // gerakan peluru
