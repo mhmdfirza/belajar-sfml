@@ -98,13 +98,13 @@ int main()
     // static_cast<float>(windowsSize.x)/2.f
 
     // LOAD MUSIC uncomment shift+ctrl+x
-//    sf::Music music;
-//    if (!music.openFromFile("resources/music/aud1.mp3")){
-//        cout << "Error: Failed Load Music\n";
-//        return -1;
-//    }
-//    music.play();
-//    music.setVolume(50);
+    sf::Music music;
+    if (!music.openFromFile("resources/music/aud1.mp3")){
+        cout << "Error: Failed Load Music\n";
+        return -1;
+    }
+    music.play();
+    music.setVolume(50);
 
     float speed = 1.f;
 
