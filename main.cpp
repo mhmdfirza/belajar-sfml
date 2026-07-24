@@ -136,12 +136,12 @@ int main()
             ship.rotate(sf::degrees(0.5));
 
         // rencananya buat fungsi puter 180, tapi perlu tambahin motion muternya biar ga langsung
-//        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
-//            ship.rotate(sf::degrees(180.f));
-//        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
-//            ship.rotate(sf::degrees(180.f));
-//        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
-//            float.bullet(ship.x, ship.y - offset);
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
+            ship.rotate(sf::degrees(180.f));
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
+            ship.rotate(sf::degrees(180.f));
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
+            float.bullet(ship.x, ship.y - offset);
 
         // ------------------------ SPAWN BULLET ------------------------
 
