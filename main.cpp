@@ -135,13 +135,13 @@ int main()
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
             ship.rotate(sf::degrees(0.5));
 
-        // rencananya buat fungsi puter 180, tapi perlu tambahin motion muternya biar ga langsung
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
-            ship.rotate(sf::degrees(180.f));
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
-            ship.rotate(sf::degrees(180.f));
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
-            float.bullet(ship.x, ship.y - offset);
+//        // rencananya buat fungsi puter 180, tapi perlu tambahin motion muternya biar ga langsung
+//        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
+//            ship.rotate(sf::degrees(180.f));
+//        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
+//            ship.rotate(sf::degrees(180.f));
+//        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
+//            float.bullet(ship.x, ship.y - offset);
 
         // ------------------------ SPAWN BULLET ------------------------
 
@@ -180,35 +180,35 @@ int main()
             // rest cooldown temban
             fireClock.restart();
 
-            std::remove_if(bullets.begin(), bullets.end(), [windowSize](const Bullet& b) {
-                return (pos.x < 0.f || pos.x > windowSize.x || pos.y < 0.f || pos.y > windowSize.y);
-                sf::Vector2f pos = b.shape.getPosition();
-                });
+//            std::remove_if(bullets.begin(), bullets.end(), [windowSize](const Bullet& b) {
+//                return (pos.x < 0.f || pos.x > windowSize.x || pos.y < 0.f || pos.y > windowSize.y);
+//                sf::Vector2f pos = b.shape.getPosition();
+//                });
         }
 
         // ---------------- SPAWN ENEMY ----------------
-        if (enemySpawnClock.getElapsedTime().asSeconds() >= enemySpawnRate)
-        {
-            sf::Vector2f winSize = static_cast<sf::Vector2f>(window.getSize());
-            sf::Vector2f spawnPos;
-
-            // Pilih sisi spawn secara acak (0: Atas, 1: Kanan, 2: Bawah, 3: Kiri)
-            int side = std::rand() % 4;
-            if (side == 0)      spawnPos = { static_cast<float>(std::rand() % static_cast<int>(winSize.x)), -30.f };
-            else if (side == 1) spawnPos = { winSize.x + 30.f, static_cast<float>(std::rand() % static_cast<int>(winSize.y)) };
-            else if (side == 2) spawnPos = { static_cast<float>(std::rand() % static_cast<int>(winSize.x)), winSize.y + 30.f };
-            else                spawnPos = { -30.f, static_cast<float>(std::rand() % static_cast<int>(winSize.y)) };
-
-            Enemy newEnemy;
-            newEnemy.shape.setRadius(15.f);
-            newEnemy.shape.setFillColor(sf::Color::Red);
-            newEnemy.shape.setOrigin({15.f, 15.f});
-            newEnemy.shape.setPosition(spawnPos);
-            newEnemy.speed = 120.f + (std::rand() % 80); // Kecepatan acak (120 - 200)
-
-            enemies.push_back(newEnemy);
-            enemySpawnClock.restart();
-        }
+//        if (enemySpawnClock.getElapsedTime().asSeconds() >= enemySpawnRate)
+//        {
+//            sf::Vector2f winSize = static_cast<sf::Vector2f>(window.getSize());
+//            sf::Vector2f spawnPos;
+//
+//            // Pilih sisi spawn secara acak (0: Atas, 1: Kanan, 2: Bawah, 3: Kiri)
+//            int side = std::rand() % 4;
+//            if (side == 0)      spawnPos = { static_cast<float>(std::rand() % static_cast<int>(winSize.x)), -30.f };
+//            else if (side == 1) spawnPos = { winSize.x + 30.f, static_cast<float>(std::rand() % static_cast<int>(winSize.y)) };
+//            else if (side == 2) spawnPos = { static_cast<float>(std::rand() % static_cast<int>(winSize.x)), winSize.y + 30.f };
+//            else                spawnPos = { -30.f, static_cast<float>(std::rand() % static_cast<int>(winSize.y)) };
+//
+//            Enemy newEnemy;
+//            newEnemy.shape.setRadius(15.f);
+//            newEnemy.shape.setFillColor(sf::Color::Red);
+//            newEnemy.shape.setOrigin({15.f, 15.f});
+//            newEnemy.shape.setPosition(spawnPos);
+//            newEnemy.speed = 120.f + (std::rand() % 80); // Kecepatan acak (120 - 200)
+//
+//            enemies.push_back(newEnemy);
+//            enemySpawnClock.restart();
+//        }
 
         // gerakan peluru
         for (auto& b : bullets){
