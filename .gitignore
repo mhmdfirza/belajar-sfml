@@ -1,0 +1,42 @@
+// Source - https://stackoverflow.com/a/50106243
+// Posted by rollstuhlfahrer
+// Retrieved 2026-07-28, License - CC BY-SA 3.0
+
+*.layout
+*.depend
+
+bin/
+obj/
+
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app

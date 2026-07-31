@@ -38,6 +38,7 @@
 			<Add directory="C:/Program Files/SFML-3.1.0/lib" />
 		</Linker>
 		<Unit filename="main.cpp" />
+		<Unit filename="mainMenu.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
