@@ -43,3 +43,45 @@ Log Belajar
 1. Fix fitur bullet
 2. Menambahkan enemy
 3. 
+
+8/3/2026
+1. Rebuild from Scratch 
+2. Menyusun ulang dengan mengimpementasikan arsitektur proper
+
+## ARCHITECTURE & DIRECTORY STRUCTURE
+
+'''
+SpaceShooter/
+├── assets/
+│   ├── fonts/
+│   ├── music/
+│   ├── sounds/
+│   └── textures/
+├── include/
+│   └── Engine/
+│       └── Engine.hpp
+├── src/
+│   ├── Engine/
+│   │   └── Engine.cpp
+│   └── main.cpp
+└── CMakeLists.txt (or Code::Blocks Project File)
+'''
+
+## Class Architecture Diagram 
+
++-------------------------------------------------------+
+|                       Engine                          |
++-------------------------------------------------------+
+| - m_window       : sf::RenderWindow                   |
+| - m_timePerFrame : const sf::Time (1/60s)             |
+| - m_isRunning    : bool                               |
++-------------------------------------------------------+
+| + Engine()                                            |
+| + run()          : void                               |
+| - processEvents(): void                               |
+| - update(sf::Time fixedTime) : void                   |
+| - render()       : void                               |
++-------------------------------------------------------+
+
+
+
