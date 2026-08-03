@@ -1,56 +1,55 @@
-# Belajar Low Level Game Development 
-## Playground 1 (Space Shooter Game)
+# Belajar Low Level Game Development
+## Playground 1 - Space Shooter Game
 
-Log Belajar
+## Log Belajar
 
-7/17/2026
-1. Konfigurasi sistem environment windows 11 from scratch
-2. Instal C++ Compiler, SFML Library, CodeBlocks
-3. Buat program pertama (menampilkan window)
-4. Belajar menampilkan object SFML (shape & text)
-5. Belajar memasukkan input keyboard WASD untuk menggerakan object shape
-5. Menampilkan teks dibelakang object 
+### 17/07/2026
+- Konfigurasi sistem environment Windows 11 dari nol.
+- Instal compiler C++, library SFML, dan CodeBlocks.
+- Membuat program pertama untuk menampilkan window.
+- Belajar menampilkan object SFML (shape dan text).
+- Belajar input keyboard WASD untuk menggerakkan object shape.
+- Menampilkan teks di belakang object.
 
-7/17/2026
-1. Menambahkan asset gambar, musik, dan font
-2. Mengganti object shape menjadi shape yang ditempel oleh texture untuk menampilkan object ship
-3. Menambahkan mekanisme menembakkan peluru yang keluar dari object ship
-4. Menambahkan struct dari beberapa komponen penting untuk mekanik menembak
-5. Menambahkan beberapa input keyboard untuk rotasi dan menembak
+### 17/07/2026 (lanjutan)
+- Menambahkan asset gambar, musik, dan font.
+- Mengganti object shape menjadi texture untuk menampilkan object ship.
+- Menambahkan mekanisme menembakkan peluru dari object ship.
+- Menambahkan struct dari beberapa komponen penting untuk mekanik menembak.
+- Menambahkan beberapa input keyboard untuk rotasi dan menembak.
 
-7/18/2026
-1. Memperbaiki bug musik
-2. Memperbaiki logika projektil peluru
-3. Memperbaiki error struct dari object
+### 18/07/2026
+- Memperbaiki bug musik.
+- Memperbaiki logika projectile peluru.
+- Memperbaiki error struct dari object.
 
-7/19/2026
-1. Progress logika proyektil peluru
-2. Progress logika peluru
-3. Progress penempatan peluru
-4. IDEA:
-- Menambahkan logika penyimpanan peluru
-- Menambahkan logika mag peluru
-- Menambahkan object target tembak
-- Menambahkan poin jika peluru mengenai target
+### 19/07/2026
+- Progress logika projectile peluru.
+- Progress logika peluru.
+- Progress penempatan peluru.
+- IDEA:
+  - Menambahkan logika penyimpanan peluru.
+  - Menambahkan logika mag peluru.
+  - Menambahkan object target tembak.
+  - Menambahkan poin jika peluru mengenai target.
 
-7/22/2026
-1. Progress logika penempatan peluru
-2. Logika posisi peluru
-3. Logika hitbox peluru
-4. Logika hitbox target
+### 22/07/2026
+- Progress logika penempatan peluru.
+- Logika posisi peluru.
+- Logika hitbox peluru.
+- Logika hitbox target.
 
-7/23/2026
-1. Fix fitur bullet
-2. Menambahkan enemy
-3. 
+### 23/07/2026
+- Fix fitur bullet.
+- Menambahkan enemy.
 
-8/3/2026
-1. Rebuild from Scratch 
-2. Menyusun ulang dengan mengimpementasikan arsitektur proper
+### 03/08/2026
+- Rebuild from scratch.
+- Menyusun ulang proyek dengan mengimplementasikan arsitektur yang lebih rapi.
 
-## ARCHITECTURE & DIRECTORY STRUCTURE
+## Struktur Direktori
 
-'''
+```text
 SpaceShooter/
 ├── assets/
 │   ├── fonts/
@@ -64,11 +63,12 @@ SpaceShooter/
 │   ├── Engine/
 │   │   └── Engine.cpp
 │   └── main.cpp
-└── CMakeLists.txt (or Code::Blocks Project File)
-'''
+└── CMakeLists.txt (atau file project Code::Blocks)
+```
 
-## Class Architecture Diagram 
+## Diagram Arsitektur Kelas
 
+```text
 +-------------------------------------------------------+
 |                       Engine                          |
 +-------------------------------------------------------+
@@ -82,6 +82,5 @@ SpaceShooter/
 | - update(sf::Time fixedTime) : void                   |
 | - render()       : void                               |
 +-------------------------------------------------------+
-
-
+```
 
