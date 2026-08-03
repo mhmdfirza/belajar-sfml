@@ -23,7 +23,7 @@ struct Enemy {
     bool destroy = false; // Penanda untuk dihapus
 };
 
-int main()
+class Game;
 {
     // Seed acak berbasis waktu
     std::srand(static_cast<unsigned int>(std::time(nullptr)));
@@ -233,4 +233,5 @@ int main()
     }
 
     return 0;
-}
+
+};
